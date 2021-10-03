@@ -14,12 +14,10 @@ public class httplibrary {
         List<String> headerList = new ArrayList<>();
         String[] datalist = options.split(" ");
         List<String> data = Arrays.asList(datalist);
-        String body = "";
 
         String res = "";
         String headerKeyValue;
         StringBuilder request = new StringBuilder("");
-        //FileOutputStream out = null;
 
 
         URI uri =  new URI(url);
@@ -30,10 +28,6 @@ public class httplibrary {
         String uAgent = httplibrary.class.getName();
         String conn = "";
 
-//		System.out.println("Host: " + host);
-//		System.out.println("Path: " + path);
-//		System.out.println("Query: " + query);
-//		System.out.println();
 
         if(path.length() == 0 || path == null)
             path = "/";
@@ -45,9 +39,6 @@ public class httplibrary {
 
         if(port == -1)
             port = 80;
-
-
-        SocketAddress serverAddress = new InetSocketAddress(host, port);
 
         //Extra
         Socket sock = new Socket(host, 80);
@@ -88,39 +79,26 @@ public class httplibrary {
 
         while ((line = br.readLine()) != null)
         {
-            //System.out.println(line);
             ans.append(line + NL);
         }
         res = ans.toString();
         //Extra
 
+        //Verbose
+        if(!data.contains("-v"))
+            res = res.substring(res.indexOf("{"), res.lastIndexOf("}")+1);
+
+
         // Writing Response to a file using -o
         if(options.contains("-o ")) {
 
-            if(!data.contains("-v"))
-                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
-
             String fname = data.get(data.indexOf("-o") + 1);
-//            try {
-//                System.out.println("fname : " + fname);
-//                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
-//
-//                bufferedWriter.write(res);
-//                bufferedWriter.close();
-//
-//                System.out.println("Response successfully saved to " + fname);
-//            } catch (IOException ex) {
-//                System.out.println("Error Writing file named '" + fname + "'" + ex);
-//            }
 
             writeResponseToFile(fname, res);
             return "";
 
         }
 
-        // Verbose
-        if(!data.contains("-v"))
-            return res.substring(res.indexOf("{"), res.lastIndexOf("}")+1);
 
         return res;
     }
@@ -139,7 +117,6 @@ public class httplibrary {
         String res = "";
         String headerKeyValue;
         StringBuilder request = new StringBuilder("");
-        //FileOutputStream out = null;
 
 
         URI uri =  new URI(url);
@@ -150,10 +127,6 @@ public class httplibrary {
         String uAgent = httplibrary.class.getName();
         String conn = "";
 
-//		System.out.println("Host: " + host);
-//		System.out.println("Path: " + path);
-//		System.out.println("Query: " + query);
-        System.out.println();
 
         if(path.length() == 0 || path == null)
             path = "/";
@@ -166,8 +139,6 @@ public class httplibrary {
         if(port == -1)
             port = 80;
 
-
-        SocketAddress serverAddress = new InetSocketAddress(host, port);
 
         //Extra
         Socket sock = new Socket(host, 80);
@@ -189,32 +160,10 @@ public class httplibrary {
         if(options.contains("-f ")){
 
             String fname = data.get(data.indexOf("-f") + 1);
-            //System.out.println("FILE NAME : " + fname);
-            StringBuilder lines = new StringBuilder();
-            String line = null;
 
-            try
-            {
-
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("Assignment 1/src/"+ fname));
-
-                while((line = bufferedReader.readLine()) != null)
-                {
-                    lines.append(line + "\n");
-
-                }
-                body = lines.toString();
-                cl = body.length();
-                System.out.println(body);
-                bufferedReader.close();
-            }
-            catch(IOException ex)
-            {
-                System.out.println("Error reading file named '" + fname + "'" + ex);
-            }
-
+            body = readDataFromFile(fname);
+            cl = body.length();
         }
-
 
         request.append("Content-Length: " + cl + NL);
 
@@ -225,7 +174,6 @@ public class httplibrary {
             if (data.get(i).equals("-h")) {
                 headerList.add(data.get(i + 1));
             }
-            //Add for -d and -f for post
         }
 
         if(!headerList.isEmpty())
@@ -236,8 +184,7 @@ public class httplibrary {
             }
         }
 
-
-        request.append( NL + body);
+        request.append(NL + body);
 
         //Sending Part
         pw.write(request.toString());
@@ -252,45 +199,24 @@ public class httplibrary {
 
         while ((line = br.readLine()) != null)
         {
-            //System.out.println(line);
             ans.append(line + NL);
         }
+
         res = ans.toString();
         //Extra
 
 
+        if(!data.contains("-v"))
+            res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
+
+
         // Writing Response to a file using -o
-        if(options.contains("-o ")) {
-
-            if(!data.contains("-v"))
-                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
-
-                String fname = data.get(data.indexOf("-o") + 1);
-//            try {
-//                System.out.println("fname : " + fname);
-//                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
-//
-//                bufferedWriter.write(res);
-//                bufferedWriter.close();
-//
-//                System.out.println("Response successfully saved to " + fname);
-//
-//            } catch (IOException ex) {
-//                System.out.println("Error Writing file named '" + fname + "'" + ex);
-//            }
+        if(options.contains("-o "))
+        {
+            String fname = data.get(data.indexOf("-o") + 1);
             writeResponseToFile(fname, res);
-
-
             return "";
         }
-
-
-
-
-        // Verbose
-        if(!data.contains("-v"))
-            return res.substring(res.indexOf("{"), res.lastIndexOf("}"));
-
 
         return res;
     }
@@ -298,8 +224,8 @@ public class httplibrary {
 
     public void writeResponseToFile(String fname, String data)
     {
-        try {
-            System.out.println("fname : " + fname);
+        try
+        {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
 
             bufferedWriter.write(data);
@@ -310,6 +236,31 @@ public class httplibrary {
         } catch (IOException ex) {
             System.out.println("Error Writing file named '" + fname + "'" + ex);
         }
+    }
+
+    public String readDataFromFile(String fname)
+    {
+        StringBuilder lines = new StringBuilder("");
+        String line = null;
+
+        try
+        {
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Assignment 1/src/"+ fname));
+
+            while((line = bufferedReader.readLine()) != null)
+            {
+                lines.append(line + "\n");
+
+            }
+            bufferedReader.close();
+        }
+        catch(IOException ex)
+        {
+            System.out.println("Error reading file named '" + fname + "'" + ex);
+        }
+
+        return lines.toString();
     }
 
 }
