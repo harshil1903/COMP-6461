@@ -2,6 +2,34 @@
 import java.util.Scanner;
 
 public class httpc {
+
+    public static boolean validateGet(String input)
+    {
+        if(input.contains("-d") || input.contains("-f"))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validatePost(String input)
+    {
+        if(input.contains("-d") && input.contains("-f"))
+        {
+            return false;
+        }
+        else
+        {
+            if(input.contains("-d") || input.contains("-f"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public static void main(String[] args) throws Exception {
         httplibrary library = new httplibrary();
         Scanner sc = new Scanner(System.in);
@@ -49,6 +77,12 @@ public class httpc {
                     // GET
                     if (input.contains("get") && !(input.endsWith("help")) && !(input.endsWith("get")))
                     {
+                        if(!validateGet(input))
+                        {
+                            System.out.println("GET command can not have -d or -f as options. \nTry Again");
+                            continue;
+                        }
+
                         String url = input.substring(input.indexOf("http://"), input.length() - 1);
                         if(url.contains(" "))
                         {
@@ -64,6 +98,13 @@ public class httpc {
                     // POST
                     else if (input.contains("post") && !(input.endsWith("help")))
                     {
+                        if(!validatePost(input))
+                        {
+                            System.out.println("POST command can have either -d or -f but not both of them together as options. \nTry Again");
+                            continue;
+                        }
+
+
                         String url = input.substring(input.indexOf("http://"), input.length());
                         if(url.contains(" "))
                         {
@@ -76,7 +117,7 @@ public class httpc {
 
 
                     } else {
-                        System.out.println("Invalid Command");
+                        System.out.println("Invalid  GET/POST Command");
                     }
                 }
             } else {
@@ -93,15 +134,19 @@ httpc get 'http://httpbin.org/get?course=networking&assignment=1'
 
 httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
 
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1' -o outget.txt
+
+httpc get -h Content-Type:application/json 'http://httpbin.org/get?course=networking&assignment=1'
+
 httpc post -h Content-Type:application/json -d '{"Assignment": 1}' http://httpbin.org/post
 
 httpc post -h Content-Type:application/json -f abc.txt http://httpbin.org/post
 
-httpc post -h Content-Type:application/json -f abc.txt http://httpbin.org/post -o out.txt
+httpc post -v -h Content-Type:application/json -f abc.txt http://httpbin.org/post -o out.txt
 
-httpc get -h Content-Type:application/json 'http://httpbin.org/get?course=networking&assignment=1'
+
 
 curl -X GET "https://httpbin.org/get" -H "accept: application/json"
-src.httpc get -h accept:application/json "https://httpbin.org/get"
+httpc get -h accept:application/json "https://httpbin.org/get"
 
  */

@@ -94,6 +94,29 @@ public class httplibrary {
         res = ans.toString();
         //Extra
 
+        // Writing Response to a file using -o
+        if(options.contains("-o ")) {
+
+            if(!data.contains("-v"))
+                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
+
+            String fname = data.get(data.indexOf("-o") + 1);
+//            try {
+//                System.out.println("fname : " + fname);
+//                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+//
+//                bufferedWriter.write(res);
+//                bufferedWriter.close();
+//
+//                System.out.println("Response successfully saved to " + fname);
+//            } catch (IOException ex) {
+//                System.out.println("Error Writing file named '" + fname + "'" + ex);
+//            }
+
+            writeResponseToFile(fname, res);
+            return "";
+
+        }
 
         // Verbose
         if(!data.contains("-v"))
@@ -235,31 +258,31 @@ public class httplibrary {
         res = ans.toString();
         //Extra
 
-        System.out.println("Outside -O");
 
         // Writing Response to a file using -o
-        if(options.contains("-o ")){
+        if(options.contains("-o ")) {
 
-            System.out.println("Inside -O");
+            if(!data.contains("-v"))
+                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
 
-            String fname = data.get(data.indexOf("-o") + 1);
-            try
-            {
-                System.out.println("fname : " + fname);
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+                String fname = data.get(data.indexOf("-o") + 1);
+//            try {
+//                System.out.println("fname : " + fname);
+//                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+//
+//                bufferedWriter.write(res);
+//                bufferedWriter.close();
+//
+//                System.out.println("Response successfully saved to " + fname);
+//
+//            } catch (IOException ex) {
+//                System.out.println("Error Writing file named '" + fname + "'" + ex);
+//            }
+            writeResponseToFile(fname, res);
 
-                bufferedWriter.write(res);
-                bufferedWriter.close();
-            }
-            catch(IOException ex)
-            {
-                System.out.println("Error Writing file named '" + fname + "'" + ex);
-            }
 
+            return "";
         }
-
-        System.out.println("After -O");
-
 
 
 
@@ -270,6 +293,23 @@ public class httplibrary {
 
 
         return res;
+    }
+
+
+    public void writeResponseToFile(String fname, String data)
+    {
+        try {
+            System.out.println("fname : " + fname);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+
+            bufferedWriter.write(data);
+            bufferedWriter.close();
+
+            System.out.println("Response successfully saved to " + fname);
+
+        } catch (IOException ex) {
+            System.out.println("Error Writing file named '" + fname + "'" + ex);
+        }
     }
 
 }
