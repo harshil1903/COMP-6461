@@ -84,10 +84,17 @@ public class httplibrary {
         res = ans.toString();
         //Extra
 
-        //Verbose
+        //Verbose less response
         if(!data.contains("-v"))
-            res = res.substring(res.indexOf("{"), res.lastIndexOf("}")+1);
-
+        {
+            try {
+                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error in verbose less response");
+            }
+        }
 
         // Writing Response to a file using -o
         if(options.contains("-o ")) {
@@ -206,9 +213,17 @@ public class httplibrary {
         //Extra
 
 
+        //Verbose less response
         if(!data.contains("-v"))
-            res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
-
+        {
+            try {
+                res = res.substring(res.indexOf("{"), res.lastIndexOf("}"));
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error in verbose less response \n\n");
+            }
+        }
 
         // Writing Response to a file using -o
         if(options.contains("-o "))
