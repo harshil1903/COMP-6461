@@ -18,13 +18,6 @@ public class httpc {
         {
             return false;
         }
-//        else
-//        {
-//            if(input.contains("-d") || input.contains("-f"))
-//            {
-//                return true;
-//            }
-//        }
         return true;
     }
 
@@ -165,5 +158,8 @@ httpc get -h accept:application/json 'http://httpbin.org/get'
 
 curl -X POST "http://httpbin.org/post" -H  "accept: application/json"
 httpc post -h accept:application/json 'http://httpbin.org/post'
+
+curl -X GET "http://httpbin.org/headers" -H  "accept: application/json"
+httpc get -h accept:application/json 'http://httpbin.org/headers'
 
  */
