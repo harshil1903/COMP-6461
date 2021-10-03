@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0eea705-7246-4a15-b309-ed63db5f1e4e" name="Default Changelist" comment="Added HttpLibrary">
-      <change afterPath="$PROJECT_DIR$/Assignment 1/src/httpc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="c0eea705-7246-4a15-b309-ed63db5f1e4e" name="Default Changelist" comment="Added gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,9 +18,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Concordia\6461 Communication Network and Protocols\Github" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Application" factoryName="Application">
@@ -57,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1633220590037</updated>
-      <workItem from="1633220595994" duration="1442000" />
+      <workItem from="1633220595994" duration="1768000" />
     </task>
     <task id="LOCAL-00001" summary="Added HttpLibrary">
       <created>1633221742017</created>
@@ -66,7 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1633221742017</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Httpc">
+      <created>1633222078096</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1633222078096</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added gitignore">
+      <created>1633222332818</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1633222332818</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,6 +100,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added HttpLibrary" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added HttpLibrary" />
+    <MESSAGE value="Added Httpc" />
+    <MESSAGE value="Added gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added gitignore" />
   </component>
 </project>
