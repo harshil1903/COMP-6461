@@ -154,13 +154,46 @@ public class httplibrary {
         req = "POST " + path + " HTTP/1.0" + NL + "Host: " + host + NL ;
         request.append(req);
 
+
+        // Inline Data using -d
         if(options.contains("-d ")){
             body = options.substring(options.indexOf("{", options.indexOf("-d")), options.indexOf("}")+1);
             cl = body.length();
         }
 
+        // File Data using -f
+        if(options.contains("-f ")){
+
+            String fname = data.get(data.indexOf("-f") + 1);
+            //System.out.println("FILE NAME : " + fname);
+            StringBuilder lines = new StringBuilder();
+            String line = null;
+
+            try
+            {
+                FileReader fileReader = new FileReader(fname);
+
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                while((line = bufferedReader.readLine()) != null)
+                {
+                    lines.append(line);
+                }
+                body = lines.toString();
+                bufferedReader.close();
+            }
+            catch(IOException ex)
+            {
+                System.out.println("Error reading file named '" + fname + "'");
+            }
+
+        }
+
+
         request.append("Content-Length: " + cl + NL);
 
+
+        // Headers using -h
         for (int i = 0; i < data.size(); i++)
         {
             if (data.get(i).equals("-h")) {

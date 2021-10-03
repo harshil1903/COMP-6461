@@ -47,7 +47,8 @@ public class httpc {
 
                 } else {
                     // GET
-                    if (input.contains("get") && !(input.endsWith("help")) && !(input.endsWith("get"))) {
+                    if (input.contains("get") && !(input.endsWith("help")) && !(input.endsWith("get")))
+                    {
                         String url = input.substring(input.indexOf("http://"), input.length() - 1);
                         String data = input.substring(input.indexOf("get") + 4, input.indexOf("http://") - 1);
                         result = library.GET(url, data);
@@ -56,7 +57,8 @@ public class httpc {
                     }
 
                     // POST
-                    else if (input.contains("post") && !(input.endsWith("help"))) {
+                    else if (input.contains("post") && !(input.endsWith("help")))
+                    {
                         String url = input.substring(input.indexOf("http://"), input.length());
                         String data = input.substring(input.indexOf("post") + 5, input.indexOf("http://") - 1);
                         result = library.POST(url, data);
