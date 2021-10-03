@@ -50,7 +50,12 @@ public class httpc {
                     if (input.contains("get") && !(input.endsWith("help")) && !(input.endsWith("get")))
                     {
                         String url = input.substring(input.indexOf("http://"), input.length() - 1);
-                        String data = input.substring(input.indexOf("get") + 4, input.indexOf("http://") - 1);
+                        if(url.contains(" "))
+                        {
+                            url = url.split(" ")[0];
+                        }
+                        //String data = input.substring(input.indexOf("get") + 4, input.indexOf("http://") - 1);
+                        String data = input.substring(input.indexOf("get") + 4);
                         result = library.GET(url, data);
                         System.out.println(result);
 
@@ -60,7 +65,12 @@ public class httpc {
                     else if (input.contains("post") && !(input.endsWith("help")))
                     {
                         String url = input.substring(input.indexOf("http://"), input.length());
-                        String data = input.substring(input.indexOf("post") + 5, input.indexOf("http://") - 1);
+                        if(url.contains(" "))
+                        {
+                            url = url.split(" ")[0];
+                        }
+                        //String data = input.substring(input.indexOf("post") + 5, input.indexOf("http://") - 1);
+                        String data = input.substring(input.indexOf("post") + 5);
                         result = library.POST(url, data);
                         System.out.println(result);
 
@@ -84,6 +94,10 @@ httpc get 'http://httpbin.org/get?course=networking&assignment=1'
 httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
 
 httpc post -h Content-Type:application/json -d '{"Assignment": 1}' http://httpbin.org/post
+
+httpc post -h Content-Type:application/json -f abc.txt http://httpbin.org/post
+
+httpc post -h Content-Type:application/json -f abc.txt http://httpbin.org/post -o out.txt
 
 httpc get -h Content-Type:application/json 'http://httpbin.org/get?course=networking&assignment=1'
 

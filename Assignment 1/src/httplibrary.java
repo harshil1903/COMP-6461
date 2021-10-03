@@ -158,6 +158,7 @@ public class httplibrary {
         // Inline Data using -d
         if(options.contains("-d ")){
             body = options.substring(options.indexOf("{", options.indexOf("-d")), options.indexOf("}")+1);
+            System.out.println(body);
             cl = body.length();
         }
 
@@ -171,20 +172,22 @@ public class httplibrary {
 
             try
             {
-                FileReader fileReader = new FileReader(fname);
 
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("Assignment 1/src/"+ fname));
 
                 while((line = bufferedReader.readLine()) != null)
                 {
-                    lines.append(line);
+                    lines.append(line + "\n");
+
                 }
                 body = lines.toString();
+                cl = body.length();
+                System.out.println(body);
                 bufferedReader.close();
             }
             catch(IOException ex)
             {
-                System.out.println("Error reading file named '" + fname + "'");
+                System.out.println("Error reading file named '" + fname + "'" + ex);
             }
 
         }
@@ -231,6 +234,35 @@ public class httplibrary {
         }
         res = ans.toString();
         //Extra
+
+        System.out.println("Outside -O");
+
+        // Writing Response to a file using -o
+        if(options.contains("-o ")){
+
+            System.out.println("Inside -O");
+
+            String fname = data.get(data.indexOf("-o") + 1);
+            try
+            {
+                System.out.println("fname : " + fname);
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+
+                bufferedWriter.write(res);
+                bufferedWriter.close();
+            }
+            catch(IOException ex)
+            {
+                System.out.println("Error Writing file named '" + fname + "'" + ex);
+            }
+
+        }
+
+        System.out.println("After -O");
+
+
+
+
 
         // Verbose
         if(!data.contains("-v"))
