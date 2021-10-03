@@ -1,8 +1,11 @@
 # Default ignored files
 /shelf/
-.gitignore/workspace.xml
-
-**/out/*
+.idea/intellij-javadocs-4.0.1.xml
+.idea/workspace.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+/out/
 # Datasource local storage ignored files
 /../../../../../:\Concordia\6461 Communication Network and Protocols\Github\.idea/dataSources/
 /../../../../../:\Concordia\6461 Communication Network and Protocols\Github\out\
