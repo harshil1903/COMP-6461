@@ -1,8 +1,11 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+.gitignore/workspace.xml
+
+**/out/*
 # Datasource local storage ignored files
 /../../../../../:\Concordia\6461 Communication Network and Protocols\Github\.idea/dataSources/
+/../../../../../:\Concordia\6461 Communication Network and Protocols\Github\out\
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
