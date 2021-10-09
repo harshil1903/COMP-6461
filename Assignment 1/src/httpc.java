@@ -156,9 +156,6 @@ httpc post -v -h Content-Type:application/json -f abc.txt http://httpbin.org/pos
 curl -X GET "https://httpbin.org/get" -H "accept: application/json"
 httpc get -h accept:application/json 'http://httpbin.org/get'
 
-curl -X POST "http://httpbin.org/post" -H  "accept: application/json"
-httpc post -h accept:application/json 'http://httpbin.org/post'
-
 curl -X GET "http://httpbin.org/headers" -H  "accept: application/json"
 httpc get -h accept:application/json 'http://httpbin.org/headers'
 
