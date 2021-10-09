@@ -25,8 +25,6 @@ public class httplibrary {
         String path = uri.getRawPath();
         String query = uri.getRawQuery();
         int port = uri.getPort();
-        String uAgent = httplibrary.class.getName();
-        String conn = "";
 
 
         if(path.length() == 0 || path == null)
@@ -40,7 +38,6 @@ public class httplibrary {
         if(port == -1)
             port = 80;
 
-        //Extra
         Socket sock = new Socket(host, 80);
         OutputStream os = sock.getOutputStream();
         PrintWriter pw = new PrintWriter(os);
@@ -82,7 +79,6 @@ public class httplibrary {
             ans.append(line + NL);
         }
         res = ans.toString();
-        //Extra
 
         //Verbose less response
         if(!data.contains("-v"))
@@ -131,8 +127,6 @@ public class httplibrary {
         String path = uri.getRawPath();
         String query = uri.getRawQuery();
         int port = uri.getPort();
-        String uAgent = httplibrary.class.getName();
-        String conn = "";
 
 
         if(path.length() == 0 || path == null)
@@ -147,7 +141,7 @@ public class httplibrary {
             port = 80;
 
 
-        //Extra
+
         Socket sock = new Socket(host, 80);
         OutputStream os = sock.getOutputStream();
         PrintWriter pw = new PrintWriter(os);
@@ -210,7 +204,7 @@ public class httplibrary {
         }
 
         res = ans.toString();
-        //Extra
+
 
 
         //Verbose less response
