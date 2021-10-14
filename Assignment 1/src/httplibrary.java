@@ -48,7 +48,17 @@ public class httplibrary {
 
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).equals("-h")) {
-                headerList.add(data.get(i + 1));
+                String t;
+                //headerList.add(data.get(i + 1));
+                if(data.get(i+1).charAt(0) == '\'')
+                {
+                    t = data.get(i + 1).substring(1, data.get(i + 1).length() - 1);
+                }
+                else
+                {
+                    t = data.get(i+1);
+                }
+                headerList.add(t);
             }
 
         }
@@ -153,7 +163,7 @@ public class httplibrary {
         // Inline Data using -d
         if(options.contains("-d ")){
             body = options.substring(options.indexOf("{", options.indexOf("-d")), options.indexOf("}")+1);
-            System.out.println(body);
+            //System.out.println(body);
             cl = body.length();
         }
 

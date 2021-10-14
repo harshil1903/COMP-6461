@@ -1,5 +1,5 @@
 HTTP/1.1 200 OK
-Date: Sun, 03 Oct 2021 21:10:02 GMT
+Date: Thu, 14 Oct 2021 16:04:00 GMT
 Content-Type: application/json
 Content-Length: 285
 Connection: close
@@ -14,7 +14,7 @@ Access-Control-Allow-Credentials: true
   }, 
   "headers": {
     "Host": "httpbin.org", 
-    "X-Amzn-Trace-Id": "Root=1-615a1c2a-6430d6394eec540930ee7dea"
+    "X-Amzn-Trace-Id": "Root=1-616854f0-7e9e21b53edff0a6604f3935"
   }, 
   "origin": "96.20.248.208", 
   "url": "http://httpbin.org/get?course=networking&assignment=1'"
