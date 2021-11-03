@@ -185,7 +185,7 @@ public class Server {
                         body = body + "\t\"data\": \"" + response + "\",\n";
                            // System.out.println("Test 4 " + body);
 
-
+                        statusCode = 200;
                     }
 
 
@@ -258,7 +258,8 @@ public class Server {
                 body = body + "\t\"url\": \"" + url + "\"\n";
                 body = body + "}\n";
 
-                System.out.println(body);
+                if(debug)
+                    System.out.println(body);
                 pw.write(body);
                 pw.flush();
 
@@ -300,7 +301,7 @@ public class Server {
 
             while((line = bufferedReader.readLine()) != null)
             {
-                lines.append(line + "\n");
+                lines.append(line);
 
             }
             bufferedReader.close();

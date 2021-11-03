@@ -1,9 +1,6 @@
 
 import java.io.*;
-import java.net.Socket;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,9 +59,7 @@ public class ftpC {
             socket = new Socket(hostName, uri.getPort());
 
             pw = new PrintWriter(socket.getOutputStream());
-            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            StringBuilder dat = new StringBuilder();
-            String line;
+
 
             //Send Request
             System.out.println("Sending request to Server");
@@ -79,12 +74,31 @@ public class ftpC {
 
 
             //Receive Response
-            while((line = br.readLine()) != null)
+
+            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            StringBuilder dat = new StringBuilder();
+            String line;
+
+            socket.setSoTimeout(1 * 1000);
+
+            try
             {
-                System.out.println(line);
-                dat.append(line + "\n");
+                while ((line = br.readLine()) != null) {
+                    dat.append(line + "\n");
+                }
             }
+            catch (SocketTimeoutException s)
+            {
+                socket.close();
+            }
+
+            pw.close();
+            br.close();
             response = dat.toString();
+
+
+
+
 //            DataInputStream dis = null;
 //            byte[] buffer = new byte[1024];
 //            boolean end = false;
@@ -93,6 +107,7 @@ public class ftpC {
 //            try{
 //                dis = new DataInputStream(socket.getInputStream());
 //
+//                response = dis.readUTF();
 //                while(!end)
 //                {
 //                    int bytesRead = dis.read(buffer);

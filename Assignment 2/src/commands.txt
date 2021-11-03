@@ -1,0 +1,7 @@
+httpfs GET / http://localhost:8080/get/
+
+httpfs GET /test.txt http://localhost:8080/get/
+
+httpfs POST /abc.txt http://localhost:8080/post/ -d {Assignment 2 : "Comp 6461"}
+
+httpfs -v -p 8080
