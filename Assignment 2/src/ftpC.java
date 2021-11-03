@@ -16,7 +16,7 @@ public class ftpC {
     static PrintWriter pw = null;
     static BufferedReader br = null;
 
-    public static void main(String[] args) throws UnknownHostException, IOException, EOFException, URISyntaxException, ClassNotFoundException
+    public static void main(String[] args) throws UnknownHostException, IOException, URISyntaxException, ClassNotFoundException
     {
         String dir = System.getProperty("user.dir");
         File file = new File("ftpC");
@@ -44,9 +44,8 @@ public class ftpC {
                 continue;
             }
 
-            ArrayList<String> requestlist = new ArrayList<String>();
-
-            requestlist = (ArrayList<String>) Arrays.asList(request.split(" "));
+            List<String> requestlist;
+            requestlist = Arrays.asList(request.split(" "));
 
             if(request.contains("post"))
             {
@@ -69,13 +68,20 @@ public class ftpC {
 
             //Send Request
             System.out.println("Sending request to Server");
-            pw.write(request);
+            pw.write(request + "\n");
             pw.flush();
+
+            System.out.println("Test 1");
+
+            line = br.readLine();
+
+            System.out.println(line);
 
 
             //Receive Response
             while((line = br.readLine()) != null)
             {
+                System.out.println(line);
                 dat.append(line + "\n");
             }
 

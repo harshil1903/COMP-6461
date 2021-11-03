@@ -1,8 +1,7 @@
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URISyntaxException;
+import java.net.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,22 +65,115 @@ public class Server {
             if (debug)
                 System.out.println("Connection established between server and client");
 
-            pw = new PrintWriter(socket.getOutputStream());
-            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            try {
+                pw = new PrintWriter(socket.getOutputStream());
+                br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+
+//            System.out.println("TEST 1 ");
+
 
             request = br.readLine();
+//            String line;
+//            if((line = br.readLine()) == null)
+//                System.out.println("FILE NULL");
+//            else
+//                System.out.println("FILE NOT NULL");
 
-            String requestType = request.substring(0,7);
 
-            if(requestType.contains("httpc"))
+            System.out.println(request);
+
+
+            String rType = request.substring(0,7);
+
+
+
+            if(rType.contains("httpc"))
             {
                 System.out.println("Performing HTTPC operations");
             }
-            else if(requestType.contains("httpfs"))
+
+            else if(rType.contains("httpfs"))
             {
+
+
                 System.out.println("Performing HTTPFS operations");
+                String url = "";
+
+                List<String> requestData = Arrays.asList(request.split(" "));
+
+                if(request.contains("post"))
+                {
+                    url = requestData.get(2);
+                }
+                else
+                {
+                    url = requestData.get(requestData.size() - 1);
+                }
+
+                URI uri = new URI(url);
+
+                String host = uri.getHost();
+
+                String body = "{\n";
+                body = body + "\t\"args\":";
+                body = body + "{},\n";
+                body = body + "\t\"headers\": {";
 
 
+                body = body + "\n\t\t\"Connection\": \"close\",\n";
+                body = body + "\t\t\"Host\": \"" + host + "\"\n";
+                body = body + "\t},\n";
+
+                String requestType = requestData.get(1);
+
+                System.out.println(requestType);
+
+                if(requestType.equalsIgnoreCase("get/"))
+                {
+
+                    body = body + "\t\"files\": { ";
+                    List<String> files = getFilesFromDir(currentFolder);
+
+                    //Can use files directly
+                    List<String> fileFilterList = new ArrayList<String>();
+                    fileFilterList.addAll(files);
+
+                    for (int i = 0; i < fileFilterList.size() - 1; i++) {
+                            body = body + fileFilterList.get(i) + " ,\n\t\t\t    ";
+                    }
+
+                    body = body + fileFilterList.get(fileFilterList.size() - 1) + " },\n";
+
+                 //   System.out.println(body);
+
+
+                }
+
+                else if(!requestType.endsWith("/") && requestType.contains("get/"))
+                {
+
+
+
+
+                }
+
+                else if(!requestType.endsWith("/") && requestType.contains("post/"))
+                {
+
+                }
+
+                body = body + "\t\"origin\": \"" + InetAddress.getLocalHost().getHostAddress() + "\",\n";
+                body = body + "\t\"url\": \"" + url + "\"\n";
+                body = body + "}\n";
+
+                System.out.println(body);
+                pw.write(body);
+                pw.flush();
 
 
             }
@@ -91,7 +183,46 @@ public class Server {
     }
 
 
+    public void writeResponseToFile(String fname, String data)
+    {
+        try
+        {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
 
+            bufferedWriter.write(data);
+            bufferedWriter.close();
+
+            System.out.println("Response successfully saved to " + fname);
+
+        } catch (IOException ex) {
+            System.out.println("Error Writing file named '" + fname + "'" + ex);
+        }
+    }
+
+    public String readDataFromFile(String fname)
+    {
+        StringBuilder lines = new StringBuilder("");
+        String line = null;
+
+        try
+        {
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("Assignment 1/src/"+ fname));
+
+            while((line = bufferedReader.readLine()) != null)
+            {
+                lines.append(line + "\n");
+
+            }
+            bufferedReader.close();
+        }
+        catch(IOException ex)
+        {
+            System.out.println("Error reading file named '" + fname + "'" + ex);
+        }
+
+        return lines.toString();
+    }
 
 
 
