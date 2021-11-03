@@ -15,9 +15,6 @@ public class ftpC {
 
     public static void main(String[] args) throws UnknownHostException, IOException, URISyntaxException, ClassNotFoundException
     {
-        String dir = System.getProperty("user.dir");
-        File file = new File("ftpC");
-        file.mkdir();
 
         while(true)
         {

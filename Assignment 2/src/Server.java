@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 public class Server {
 
-    // static ServerSocket variable
     private static ServerSocket serverSocket;
-    // socket server port on which it will listen
     private static int port = 8080;
     private static int statusCode = 200;
     static PrintWriter pw = null;
@@ -24,7 +22,7 @@ public class Server {
 
         String dir = System.getProperty("user.dir");
 
-        System.out.println("Dir ==>>>>> " + dir);
+        System.out.println("\nCurrent Directory : " + dir + "\n");
 
         System.out.print(">");
         Scanner sc = new Scanner(System.in);
@@ -163,10 +161,10 @@ public class Server {
                     //System.out.println(files);
 
                     if (!files.contains(requestedFile)) {
-                        //Send ERROR 404 : REQUESTED FILE NOT FOUND
-                        response = "ERROR 404, REQUESTED FILE NOT FOUND";
-
-                        body = body + "\t\"message\": \"" + response + "\",\n";
+//                        //Send ERROR 404 : REQUESTED FILE NOT FOUND
+//                        response = "ERROR 404, REQUESTED FILE NOT FOUND";
+//
+//                        body = body + "\t\"message\": \"" + response + "\",\n";
 
                         statusCode = 404;
 
