@@ -11,7 +11,7 @@ public class Server {
     private static ServerSocket serverSocket;
     // socket server port on which it will listen
     private static int port = 8080;
-
+    private static int statusCode = 200;
     static PrintWriter pw = null;
     static BufferedReader br = null;
 
@@ -33,7 +33,7 @@ public class Server {
             System.out.println("Invalid Command Please try again!!");
         }
         String[] requestArray = request.split(" ");
-        requestList = new ArrayList<>();
+
         for (int i = 0; i < requestArray.length; i++) {
             requestList.add(requestArray[i]);
         }
@@ -85,7 +85,7 @@ public class Server {
 //                System.out.println("FILE NOT NULL");
 
 
-            System.out.println(request);
+            //System.out.println(request);
 
 
             String rType = request.substring(0,7);
@@ -131,7 +131,7 @@ public class Server {
 
                 String requestType = requestData.get(1);
 
-                System.out.println(requestType);
+                //System.out.println(requestType);
 
                 if(requestType.equalsIgnoreCase("GET") && requestData.get(2).equals("/"))
                 {
@@ -148,34 +148,33 @@ public class Server {
                     }
 
                     body = body + fileFilterList.get(fileFilterList.size() - 1) + " },\n";
-
-                 //   System.out.println(body);
-
+                    statusCode = 200;
 
                 }
 
                 else if(requestType.equalsIgnoreCase("GET") && !requestData.get(2).equals("/"))
                 {
                     String response = "";
-                    String requestedFileName = requestData.get(2).substring(1);
+                    String requestedFile = requestData.get(2).substring(1);
 
-                    System.out.println(requestedFileName + "     TEST");
+                    //System.out.println(requestedFileName + "     TEST");
 
                     List<String> files = getFilesFromDir(currentFolder);
 
-                    for(String f : files)
-                        System.out.println(files);
+                    //System.out.println(files);
 
-                    if (!files.contains(requestedFileName)) {
+                    if (!files.contains(requestedFile)) {
                         //Send ERROR 404 : REQUESTED FILE NOT FOUND
                         response = "ERROR 404, REQUESTED FILE NOT FOUND";
 
-                        body = body + "\t\"error\": \"" + response + "\",\n";
+                        body = body + "\t\"message\": \"" + response + "\",\n";
+
+                        statusCode = 404;
 
                     }
                     else {
 
-                        File file = new File(dir + "/" + requestedFileName);
+                        File file = new File(dir + "/" + requestedFile);
 //                        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 //                        String st;
 //                        while ((st = bufferedReader.readLine()) != null) {
@@ -190,13 +189,69 @@ public class Server {
                     }
 
 
-
                 }
 
                 else if(requestType.equalsIgnoreCase("POST"))
                 {
+                    String response = "";
+                    String requestedFile = requestData.get(2).substring(1);
+                    String data = "";
 
+
+                    //System.out.println(requestedFileName + "     TEST");
+
+                    List<String> files = getFilesFromDir(currentFolder);
+
+                    //System.out.println(files);
+
+                    boolean flagOverwrite = true;
+
+                    if (!files.contains(requestedFile)) {
+                        flagOverwrite = false;
+                    }
+
+                    if (flagOverwrite)
+                    {
+                        response = "Existing File Overwritten with data";
+                        statusCode = 201;
+                    }
+                    else
+                    {
+                        response = "Data saved to a new file with given name";
+                        statusCode = 202;
+                    }
+
+                    int index = requestData.indexOf("-d");
+
+                    for(int i = index + 1 ; i < requestData.size() ; i++)
+                    {
+                        data = data + requestData.get(i) + " ";
+                    }
+
+
+                    File file = new File(dir + "/" + requestedFile);
+                    Server.writeResponseToFile(file, data);
+
+                    body = body + "\t\"message\": \"" + response + "\",\n";
                 }
+
+                if(statusCode == 200)
+                {
+                    body = body + "\t\"status\": \"" + "HTTP/1.1 200 OK" + "\",\n";
+                }
+                else if(statusCode == 201)
+                {
+                    body = body + "\t\"status\": \"" + "HTTP/1.1 201 FILE OVER-WRITTEN" + "\",\n";
+                }
+                else if(statusCode == 202)
+                {
+                    body = body + "\t\"status\": \"" + "HTTP/1.1 202 NEW FILE CREATED" + "\",\n";
+                }
+                else if(statusCode == 404)
+                {
+                    body = body + "\t\"status\": \"" + "HTTP/1.1 404 FILE NOT FOUND" + "\",\n";
+                }
+
 
                 body = body + "\t\"origin\": \"" + InetAddress.getLocalHost().getHostAddress() + "\",\n";
                 body = body + "\t\"url\": \"" + url + "\"\n";
@@ -214,19 +269,21 @@ public class Server {
     }
 
 
-    static public void writeResponseToFile(String fname, String data)
+    static public void writeResponseToFile(File fname, String data)
     {
         try
         {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("Assignment 1/src/" + fname));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fname));
 
             bufferedWriter.write(data);
             bufferedWriter.close();
 
-            System.out.println("Response successfully saved to " + fname);
+            if(debug)
+                System.out.println("Response successfully saved to " + fname);
 
         } catch (IOException ex) {
-            System.out.println("Error Writing file named '" + fname + "'" + ex);
+            if(debug)
+                System.out.println("Error Writing file named '" + fname + "'" + ex);
         }
     }
 
@@ -249,7 +306,8 @@ public class Server {
         }
         catch(IOException ex)
         {
-            System.out.println("Error reading file named '" + fname + "'" + ex);
+            if(debug)
+                System.out.println("Error reading file named '" + fname + "'" + ex);
         }
 
         return lines.toString();
