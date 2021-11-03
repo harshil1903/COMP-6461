@@ -206,20 +206,21 @@ public class Server {
 
                     boolean flagOverwrite = true;
 
-                    if (!files.contains(requestedFile)) {
-                        flagOverwrite = false;
-                    }
-
-                    if (flagOverwrite)
-                    {
-                        response = "Existing File Overwritten with data";
-                        statusCode = 201;
-                    }
-                    else
-                    {
-                        response = "Data saved to a new file with given name";
+                    if (!files.contains(requestedFile))
                         statusCode = 202;
-                    }
+                    else
+                        statusCode = 201;
+
+//                    if (flagOverwrite)
+//                    {
+//                        response = "Existing File Overwritten with data";
+//                        statusCode = 201;
+//                    }
+//                    else
+//                    {
+//                        response = "Data saved to a new file with given name";
+//                        statusCode = 202;
+//                    }
 
                     int index = requestData.indexOf("-d");
 
@@ -232,7 +233,7 @@ public class Server {
                     File file = new File(dir + "/" + requestedFile);
                     Server.writeResponseToFile(file, data);
 
-                    body = body + "\t\"message\": \"" + response + "\",\n";
+                    //body = body + "\t\"message\": \"" + response + "\",\n";
                 }
 
                 if(statusCode == 200)

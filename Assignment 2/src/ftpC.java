@@ -71,11 +71,11 @@ public class ftpC {
             pw.write(request + "\n");
             pw.flush();
 
-            System.out.println("Test 1");
-
-            line = br.readLine();
-
-            System.out.println(line);
+//            System.out.println("Test 1");
+//
+//            line = br.readLine();
+//
+//            System.out.println(line);
 
 
             //Receive Response
