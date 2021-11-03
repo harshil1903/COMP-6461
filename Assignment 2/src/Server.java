@@ -28,15 +28,14 @@ public class Server {
 
         System.out.print(">");
         Scanner sc = new Scanner(System.in);
+
         request = sc.nextLine();
         if (request.isEmpty()) {
             System.out.println("Invalid Command Please try again!!");
         }
         String[] requestArray = request.split(" ");
 
-        for (int i = 0; i < requestArray.length; i++) {
-            requestList.add(requestArray[i]);
-        }
+        requestList.addAll(Arrays.asList(requestArray));
 
         if (requestList.contains("-v")) {
             debug = true;
@@ -44,12 +43,12 @@ public class Server {
 
         if (requestList.contains("-p")) {
             String portStr = requestList.get(requestList.indexOf("-p") + 1).trim();
-            port = Integer.valueOf(portStr);
+            port = Integer.parseInt(portStr);
         }
 
         if (requestList.contains("-d")) {
             dir = requestList.get(requestList.indexOf("-d") + 1).trim();
-            System.out.println("Dir ==>>>>> " + dir);
+            System.out.println("Selected directory for operations : " + dir + "\n");
         }
 
         //debug = true;
