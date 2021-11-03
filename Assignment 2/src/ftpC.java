@@ -84,8 +84,27 @@ public class ftpC {
                 System.out.println(line);
                 dat.append(line + "\n");
             }
-
             response = dat.toString();
+//            DataInputStream dis = null;
+//            byte[] buffer = new byte[1024];
+//            boolean end = false;
+//            int read;
+//
+//            try{
+//                dis = new DataInputStream(socket.getInputStream());
+//
+//                while(!end)
+//                {
+//                    int bytesRead = dis.read(buffer);
+//                    response += new String(buffer, 0 , bytesRead);
+//                }
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+
+
 
             System.out.println("\nResponse from Server : \n " + response);
 
