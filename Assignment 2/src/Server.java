@@ -108,7 +108,7 @@ public class Server {
 
                 if(request.contains("post"))
                 {
-                    url = requestData.get(2);
+                    url = requestData.get(3);
                 }
                 else
                 {
@@ -133,7 +133,7 @@ public class Server {
 
                 System.out.println(requestType);
 
-                if(requestType.equalsIgnoreCase("get/"))
+                if(requestType.equalsIgnoreCase("GET") && requestData.get(2).equals("/"))
                 {
 
                     body = body + "\t\"files\": { ";
@@ -144,7 +144,7 @@ public class Server {
                     fileFilterList.addAll(files);
 
                     for (int i = 0; i < fileFilterList.size() - 1; i++) {
-                            body = body + fileFilterList.get(i) + " ,\n\t\t\t    ";
+                            body = body + files.get(i) + " ,\n\t\t\t    ";
                     }
 
                     body = body + fileFilterList.get(fileFilterList.size() - 1) + " },\n";
@@ -154,15 +154,46 @@ public class Server {
 
                 }
 
-                else if(!requestType.endsWith("/") && requestType.contains("get/"))
+                else if(requestType.equalsIgnoreCase("GET") && !requestData.get(2).equals("/"))
                 {
+                    String response = "";
+                    String requestedFileName = requestData.get(2).substring(1);
 
+                    System.out.println(requestedFileName + "     TEST");
+
+                    List<String> files = getFilesFromDir(currentFolder);
+
+                    for(String f : files)
+                        System.out.println(files);
+
+                    if (!files.contains(requestedFileName)) {
+                        //Send ERROR 404 : REQUESTED FILE NOT FOUND
+                        response = "ERROR 404, REQUESTED FILE NOT FOUND";
+
+                        body = body + "\t\"error\": \"" + response + "\",\n";
+
+                    }
+                    else {
+
+                        File file = new File(dir + "/" + requestedFileName);
+//                        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+//                        String st;
+//                        while ((st = bufferedReader.readLine()) != null) {
+//                            response = response + st;
+//                        }
+                        response = Server.readDataFromFile(file);
+                           // serverResponse.setResponseCode("203");
+                        body = body + "\t\"data\": \"" + response + "\",\n";
+                           // System.out.println("Test 4 " + body);
+
+
+                    }
 
 
 
                 }
 
-                else if(!requestType.endsWith("/") && requestType.contains("post/"))
+                else if(requestType.equalsIgnoreCase("POST"))
                 {
 
                 }
@@ -183,7 +214,7 @@ public class Server {
     }
 
 
-    public void writeResponseToFile(String fname, String data)
+    static public void writeResponseToFile(String fname, String data)
     {
         try
         {
@@ -199,7 +230,7 @@ public class Server {
         }
     }
 
-    public String readDataFromFile(String fname)
+    static public String readDataFromFile(File fname)
     {
         StringBuilder lines = new StringBuilder("");
         String line = null;
@@ -207,7 +238,7 @@ public class Server {
         try
         {
 
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("Assignment 1/src/"+ fname));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fname));
 
             while((line = bufferedReader.readLine()) != null)
             {

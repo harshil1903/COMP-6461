@@ -49,7 +49,7 @@ public class ftpC {
 
             if(request.contains("post"))
             {
-                url = requestlist.get(2);
+                url = requestlist.get(3);
             }
             else
             {
