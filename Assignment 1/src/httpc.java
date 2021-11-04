@@ -24,7 +24,7 @@ public class httpc {
 
 
     public static void main(String[] args) throws Exception {
-        httpClientLibrary library = new httpClientLibrary();
+        httplibrary library = new httplibrary();
         Scanner sc = new Scanner(System.in);
         String input;
         String result;
