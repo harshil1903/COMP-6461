@@ -84,7 +84,7 @@ public class Server {
 
             //System.out.println(request);
 
-
+            //CAN REMOVE THIS AND COMPARE DIRECTLY WITH REQUEST
             String rType = request.substring(0,7);
 
 
@@ -92,6 +92,169 @@ public class Server {
             if(rType.contains("httpc"))
             {
                 System.out.println("Performing HTTPC operations");
+
+                String url = "";
+                String response = "";
+                String options = "";
+                int cl = 0;
+
+                List<String> requestData = Arrays.asList(request.split(" "));
+
+                url = request.substring(request.indexOf("http://"), request.length() - 1);
+
+                if(url.contains(" "))
+                {
+                    url = url.split(" ")[0];
+                }
+
+                URI uri = new URI(url);
+
+                String host = uri.getHost();
+
+                /*
+                ADD the following to Body, has to be dynamic
+                Add in string called prebody, use only if -v is used
+
+                HTTP/1.1 200 OK
+                Date: Thu, 14 Oct 2021 16:04:44 GMT
+                Content-Type: application/json
+                Content-Length: 424
+                Connection: close
+                Server: gunicorn/19.9.0
+                Access-Control-Allow-Origin: *
+                Access-Control-Allow-Credentials: true
+                */
+
+
+
+
+
+
+
+
+                if (request.contains("get"))
+                {
+                    options = request.substring(request.indexOf("get") + 4);
+                }
+
+                else if(request.contains("post"))
+                {
+                    options = request.substring(request.indexOf("post") + 5);
+                }
+
+
+
+                String[] datalist = options.split(" ");
+                List<String> data = Arrays.asList(datalist);
+               // List<String> headerList = new ArrayList<>();
+
+                String body = "{\n";
+
+
+
+                //use this after headers
+                //body = body + "\t},\n";
+
+
+
+
+
+                if (request.contains("get"))
+                {
+                    //options = request.substring(request.indexOf("get") + 4);
+                    String query = uri.getRawQuery();
+                    System.out.println(query);
+
+                    List<String> querylist = Arrays.asList(query.split("&"));
+
+                    body = body + "\t\"args\": {\n";
+
+                    for (int i = 0 ; i < querylist.size() ; i++)
+                    {
+                        String t1 = querylist.get(i).split("=")[0];
+                        String t2 = querylist.get(i).split("=")[1];
+
+                        body = body + "\t\t\"" + t1 + "\": \"" + t2 + "\",\n";
+                     }
+
+                    body = body + "\t}, \n";
+                    body = body + "\t\"headers\": {\n";
+
+
+                    for (int i = 0; i < data.size(); i++)
+                    {
+                        if (data.get(i).equals("-h")) {
+                            //headerList.add(data.get(i + 1));
+
+                            String t1 = data.get(i+1).split(":")[0];
+                            String t2 = data.get(i+1).split(":")[1];
+                            body = body + "\t\t\"" + t1 + "\": \"" + t2 + "\",\n";
+                        }
+                    }
+
+
+
+                    body = body + "\t\t\"Connection\": \"close\",\n";
+                    body = body + "\t\t\"Host\": \"" + host + "\"\n";
+                    body = body + "\t},\n";
+                }
+
+                else if(request.contains("post"))
+                {
+                    String inlineData = "";
+                    //options = request.substring(request.indexOf("post") + 5);
+                    body = body + "\t\"args\":";
+                    body = body + "{},\n";
+
+                    body = body + "\t\"data\": \"";
+                    if(options.contains("-d ")){
+                        inlineData = options.substring(options.indexOf("{", options.indexOf("-d")), options.indexOf("}")+1);
+                        //System.out.println(body);
+                        cl = body.length();
+                    }
+
+                    body = body + "\t\"headers\": {";
+
+
+                    for (int i = 0; i < data.size(); i++)
+                    {
+                        if (data.get(i).equals("-h")) {
+                            //headerList.add(data.get(i + 1));
+
+                            String t1 = data.get(i+1).split(":")[0];
+                            String t2 = data.get(i+1).split(":")[1];
+                            body = body + "\t\t\"" + t1 + "\": \"" + t2 + "\",\n";
+                        }
+                    }
+
+                    body = body + "\t\t\"Connection\": \"close\",\n";
+                    body = body + "\t\t\"Host\": \"" + host + "\"\n";
+
+
+
+                    body = body + "\t\t\"Content-Length\": \"" + cl + "\"\n";
+                    body = body + "\t},\n";
+
+                }
+
+
+
+
+
+
+
+
+
+                body = body + "\t\"origin\": \"" + InetAddress.getLocalHost().getHostAddress() + "\",\n";
+                body = body + "\t\"url\": \"" + url + "\"\n";
+                body = body + "}\n";
+
+                if(debug)
+                    System.out.println(body);
+                pw.write(body);
+                pw.flush();
+
+                socket.close();
             }
 
             else if(rType.contains("httpfs"))
@@ -126,6 +289,8 @@ public class Server {
                 body = body + "\t\t\"Host\": \"" + host + "\"\n";
                 body = body + "\t},\n";
 
+
+                // GET or POST
                 String requestType = requestData.get(1);
 
                 //System.out.println(requestType);

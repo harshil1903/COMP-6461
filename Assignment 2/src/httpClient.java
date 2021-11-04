@@ -1,7 +1,17 @@
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.util.Scanner;
 
-public class httpc {
+public class httpClient {
+
+    static Socket socket = null;
+    static PrintWriter pw = null;
+    static BufferedReader br = null;
 
     public static boolean validateGet(String input)
     {
@@ -28,6 +38,7 @@ public class httpc {
         Scanner sc = new Scanner(System.in);
         String input;
         String result;
+
 
         do {
             System.out.print("> ");
@@ -77,6 +88,7 @@ public class httpc {
                 }
                 else
                 {
+
                     // GET
                     if (input.contains("get") && !(input.endsWith("help")) && !(input.endsWith("get")))
                     {
@@ -92,9 +104,47 @@ public class httpc {
                             url = url.split(" ")[0];
                         }
 
-                        String data = input.substring(input.indexOf("get") + 4);
-                        result = library.GET(url, data);
-                        System.out.println(result);
+                        //String data = input.substring(input.indexOf("get") + 4);
+                        //result = library.GET(url, data);
+                        //System.out.println(result);
+
+                        String response;
+                        URI uri = new URI(url);
+
+                        String hostName = uri.getHost();
+                        socket = new Socket(hostName, uri.getPort());
+
+                        pw = new PrintWriter(socket.getOutputStream());
+
+
+                        //Send Request
+                        System.out.println("Sending request to Server");
+                        pw.write(input + "\n");
+                        pw.flush();
+
+
+                        //Receive response
+                        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        StringBuilder dat = new StringBuilder();
+                        String line;
+
+                        socket.setSoTimeout(1 * 1000);
+
+                        try
+                        {
+                            while ((line = br.readLine()) != null) {
+                                dat.append(line + "\n");
+                            }
+                        }
+                        catch (SocketTimeoutException s)
+                        {
+                            socket.close();
+                        }
+
+                        pw.close();
+                        br.close();
+                        response = dat.toString();
+                        System.out.println("\nResponse from Server : \n " + response);
 
                     }
 
@@ -114,9 +164,45 @@ public class httpc {
                             url = url.split(" ")[0];
                         }
 
-                        String data = input.substring(input.indexOf("post") + 5);
-                        result = library.POST(url, data);
-                        System.out.println(result);
+//                        String data = input.substring(input.indexOf("post") + 5);
+//                        result = library.POST(url, data);
+//                        System.out.println(result);
+
+                        URI uri = new URI(url);
+
+                        String hostName = uri.getHost();
+                        socket = new Socket(hostName, uri.getPort());
+
+                        pw = new PrintWriter(socket.getOutputStream());
+
+
+                        //Send Request
+                        System.out.println("Sending request to Server");
+                        pw.write(input + "\n");
+                        pw.flush();
+
+                        //Receive response
+                        br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        StringBuilder dat = new StringBuilder();
+                        String line;
+
+                        socket.setSoTimeout(1 * 1000);
+
+                        try
+                        {
+                            while ((line = br.readLine()) != null) {
+                                dat.append(line + "\n");
+                            }
+                        }
+                        catch (SocketTimeoutException s)
+                        {
+                            socket.close();
+                        }
+
+                        pw.close();
+                        br.close();
+                        String response = dat.toString();
+                        System.out.println("\nResponse from Server : \n " + response);
 
 
                     }
