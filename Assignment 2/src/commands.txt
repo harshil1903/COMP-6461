@@ -8,3 +8,11 @@ httpfs -v -p 8080
 
 
 httpc get -h Content-Type:application/json -h Test-Header:Head 'http://localhost:8080/get?course=networking&assignment=1'
+
+httpc post -h Content-Type:application/json -h Test-Header:Head -d '{"Assignment": 2, "Course": 6461}' 'http://localhost:8080/post?'
+
+httpc get -v -h Content-Type:application/json -h Test-Header:Head 'http://localhost:8080/get?course=networking&assignment=1'
+
+httpc post -v -h Content-Type:application/json -d '{"Assignment": 2, "Course": 6461}' 'http://localhost:8080/post?'
+
+

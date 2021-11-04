@@ -202,7 +202,7 @@ public class httpClient {
                         pw.close();
                         br.close();
                         String response = dat.toString();
-                        System.out.println("\nResponse from Server : \n " + response);
+                        System.out.println("\nResponse from Server : \n" + response);
 
 
                     }
