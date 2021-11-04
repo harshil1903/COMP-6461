@@ -1,14 +1,12 @@
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class ftpC {
 
-    private static List<String> headerLst = null;
     static Socket socket = null;
     static PrintWriter pw = null;
     static BufferedReader br = null;
