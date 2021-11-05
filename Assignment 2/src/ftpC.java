@@ -14,7 +14,6 @@ public class ftpC {
     public static void main(String[] args) throws IOException, URISyntaxException
     {
 
-
         while(true)
         {
             String request = "";
