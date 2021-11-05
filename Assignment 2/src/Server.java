@@ -72,23 +72,10 @@ public class Server {
                 System.out.println(e.getMessage());
             }
 
-//            System.out.println("TEST 1 ");
-
 
             request = br.readLine();
-//            String line;
-//            if((line = br.readLine()) == null)
-//                System.out.println("FILE NULL");
-//            else
-//                System.out.println("FILE NOT NULL");
 
-
-            //System.out.println(request);
-
-            //CAN REMOVE THIS AND COMPARE DIRECTLY WITH REQUEST
             String rType = request.substring(0,7);
-
-
 
             if(rType.contains("httpc"))
             {
@@ -113,27 +100,6 @@ public class Server {
 
                 String host = uri.getHost();
 
-                /*
-                ADD the following to Body, has to be dynamic
-                Add in string called prebody, use only if -v is used
-
-                HTTP/1.1 200 OK
-                Date: Thu, 14 Oct 2021 16:04:44 GMT
-                Content-Type: application/json
-                Content-Length: 424
-                Connection: close
-                Server: gunicorn/19.9.0
-                Access-Control-Allow-Origin: *
-                Access-Control-Allow-Credentials: true
-                */
-
-
-
-
-
-
-
-
                 if (request.contains("get"))
                 {
                     options = request.substring(request.indexOf("get") + 4);
@@ -149,24 +115,12 @@ public class Server {
 
                 String[] datalist = options.split(" ");
                 List<String> data = Arrays.asList(datalist);
-               // List<String> headerList = new ArrayList<>();
 
                 String body = "{\n";
 
-
-
-                //use this after headers
-                //body = body + "\t},\n";
-
-
-
-
-
                 if (request.contains("get"))
                 {
-                    //options = request.substring(request.indexOf("get") + 4);
                     String query = uri.getRawQuery();
-                    //System.out.println(query);
 
                     List<String> querylist = Arrays.asList(query.split("&"));
 
@@ -203,24 +157,17 @@ public class Server {
                 }
 
 
-
-
-
                 else if(request.contains("post"))
                 {
 
                     boolean jsonFlag = false;
                     String inlineData = "";
-                    //options = request.substring(request.indexOf("post") + 5);
                     body = body + "\t\"args\": {},\n";
-//                    body = body + "{},\n";
 
 
                     //INLINE DATA
                     body = body + "\t\"data\": \"";
                     if(options.contains("-d ")){
-                        //inlineData = options.substring(options.indexOf("{", options.indexOf("-d")), options.indexOf("}")+1);
-                        //System.out.println(body);
                         int index = data.indexOf("-d") + 1;
 
                         for (int i = index ; i < data.size() - 1 ; i++)
@@ -235,12 +182,12 @@ public class Server {
                     body = body + "\t\"files\": {},\n";
                     body = body + "\t\"form\": {},\n";
 
+
                     //HEADERS
                     body = body + "\t\"headers\": {\n";
                     for (int i = 0; i < data.size(); i++)
                     {
                         if (data.get(i).equals("-h")) {
-                            //headerList.add(data.get(i + 1));
 
                             String t1 = data.get(i+1).split(":")[0];
                             String t2 = data.get(i+1).split(":")[1];
@@ -299,9 +246,6 @@ public class Server {
                     response = response + body;
                 }
 
-
-
-
                 if(debug)
                     System.out.println(response);
                 pw.write(response);
@@ -309,14 +253,6 @@ public class Server {
 
                 socket.close();
             }
-
-
-
-
-
-
-
-
 
 
             //HTTPFS FTP REQUEST
@@ -356,8 +292,6 @@ public class Server {
                 // GET or POST
                 String requestType = requestData.get(1);
 
-                //System.out.println(requestType);
-
                 if(requestType.equalsIgnoreCase("GET") && requestData.get(2).equals("/"))
                 {
 
@@ -382,33 +316,20 @@ public class Server {
                     String response = "";
                     String requestedFile = requestData.get(2).substring(1);
 
-                    //System.out.println(requestedFileName + "     TEST");
 
                     List<String> files = getFilesFromDir(currentFolder);
 
-                    //System.out.println(files);
 
-                    if (!files.contains(requestedFile)) {
-//                        //Send ERROR 404 : REQUESTED FILE NOT FOUND
-//                        response = "ERROR 404, REQUESTED FILE NOT FOUND";
-//
-//                        body = body + "\t\"message\": \"" + response + "\",\n";
-
+                    if (!files.contains(requestedFile))
+                    {
                         statusCode = 404;
-
                     }
-                    else {
+                    else
+                    {
 
                         File file = new File(dir + "/" + requestedFile);
-//                        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-//                        String st;
-//                        while ((st = bufferedReader.readLine()) != null) {
-//                            response = response + st;
-//                        }
                         response = Server.readDataFromFile(file);
-                           // serverResponse.setResponseCode("203");
                         body = body + "\t\"data\": \"" + response + "\",\n";
-                           // System.out.println("Test 4 " + body);
 
                         statusCode = 200;
                     }
@@ -422,30 +343,13 @@ public class Server {
                     String requestedFile = requestData.get(2).substring(1);
                     String data = "";
 
-
-                    //System.out.println(requestedFileName + "     TEST");
-
                     List<String> files = getFilesFromDir(currentFolder);
 
-                    //System.out.println(files);
-
-                    boolean flagOverwrite = true;
 
                     if (!files.contains(requestedFile))
                         statusCode = 202;
                     else
                         statusCode = 201;
-
-//                    if (flagOverwrite)
-//                    {
-//                        response = "Existing File Overwritten with data";
-//                        statusCode = 201;
-//                    }
-//                    else
-//                    {
-//                        response = "Data saved to a new file with given name";
-//                        statusCode = 202;
-//                    }
 
                     int index = requestData.indexOf("-d");
 
@@ -458,7 +362,6 @@ public class Server {
                     File file = new File(dir + "/" + requestedFile);
                     Server.writeResponseToFile(file, data);
 
-                    //body = body + "\t\"message\": \"" + response + "\",\n";
                 }
 
                 if(statusCode == 200)
@@ -514,6 +417,8 @@ public class Server {
         }
     }
 
+
+
     static public String readDataFromFile(File fname)
     {
         StringBuilder lines = new StringBuilder("");
@@ -542,11 +447,6 @@ public class Server {
 
 
 
-    /**
-     * This method will give list of files from specific directory
-     *
-     * @return List of files
-     */
     static private List<String> getFilesFromDir(File currentDir) {
         List<String> filelist = new ArrayList<>();
         for (File file : currentDir.listFiles()) {

@@ -11,7 +11,7 @@ public class ftpC {
     static PrintWriter pw = null;
     static BufferedReader br = null;
 
-    public static void main(String[] args) throws UnknownHostException, IOException, URISyntaxException, ClassNotFoundException
+    public static void main(String[] args) throws IOException, URISyntaxException
     {
 
 
@@ -26,8 +26,7 @@ public class ftpC {
 
 
             if (request.isEmpty() ) {
-                System.out.println("Invalid Command, use the following command suggestions to use");
-                //Add a method to display possible command input options
+                System.out.println("Invalid Command");
                 continue;
             }
 
@@ -62,15 +61,8 @@ public class ftpC {
             pw.write(request + "\n");
             pw.flush();
 
-//            System.out.println("Test 1");
-//
-//            line = br.readLine();
-//
-//            System.out.println(line);
-
 
             //Receive Response
-
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             StringBuilder dat = new StringBuilder();
             String line;
@@ -90,33 +82,8 @@ public class ftpC {
 
             pw.close();
             br.close();
+
             response = dat.toString();
-
-
-
-
-//            DataInputStream dis = null;
-//            byte[] buffer = new byte[1024];
-//            boolean end = false;
-//            int read;
-//
-//            try{
-//                dis = new DataInputStream(socket.getInputStream());
-//
-//                response = dis.readUTF();
-//                while(!end)
-//                {
-//                    int bytesRead = dis.read(buffer);
-//                    response += new String(buffer, 0 , bytesRead);
-//                }
-//            }
-//            catch (Exception e)
-//            {
-//                e.printStackTrace();
-//            }
-
-
-
             System.out.println("\nResponse from Server : \n" + response);
 
 
