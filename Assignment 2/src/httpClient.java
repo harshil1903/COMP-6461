@@ -41,7 +41,7 @@ public class httpClient {
 
 
         do {
-            System.out.print("> ");
+            System.out.print("Enter HTTP Command > ");
             input = sc.nextLine();
             System.out.println();
 

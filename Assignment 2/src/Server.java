@@ -45,7 +45,8 @@ public class Server {
         }
 
         if (requestList.contains("-d")) {
-            dir = requestList.get(requestList.indexOf("-d") + 1).trim();
+            //dir = requestList.get(requestList.indexOf("-d") + 1).trim();
+            dir = request.substring(request.indexOf("-d")+3);
             System.out.println("Selected directory for operations : " + dir + "\n");
         }
 
