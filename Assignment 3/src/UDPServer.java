@@ -349,7 +349,7 @@ public class UDPServer {
         if(debug)
         {
             System.out.println("Sending response to Client..");
-            System.out.println(body);
+            //System.out.println(body);
         }
 
         System.out.println(url);

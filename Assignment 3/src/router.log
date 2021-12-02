@@ -464,3 +464,5 @@
 16:40:07.578858 [queue=1] packet #3, 127.0.0.1:8080 -> 127.0.0.1:51876, sz=5 is delayed for 1ms
 16:40:07.594603 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:51876, sz=5 is delivered
 16:40:07.594603 [queue=0] packet #4, 127.0.0.1:51876 -> 127.0.0.1:8080, sz=2 is dropped
+12:07:36.883488 config: drop-rate=0.20, max-delay=10ms, seed=1
+12:07:36.904494 router is listening at :3000

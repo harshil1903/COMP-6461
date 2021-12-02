@@ -48,7 +48,7 @@ public class UDPClient {
         while (true) {
             String url = "";
             String request = "";
-            System.out.print("Please Enter httpfs command ==> ");
+            System.out.print("Please Enter command ==> ");
             receivedPackets.clear();
             sequenceNum = 0;
             ackCount = 0;
