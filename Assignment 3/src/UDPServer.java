@@ -131,7 +131,7 @@ public class UDPServer {
                     }
                     else if (requestPayload.equals("Received"))
                     {
-                        System.out.println("Client: " + requestPayload + "\n Sending Close");
+                        System.out.println("Client: " + requestPayload + "\nSending Close");
                         response = packet.toBuilder().setPayload("Close".getBytes()).create();
                         channel.send(response.toBuffer(), router);
 
