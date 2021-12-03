@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * This class is the entry point of Server for FTP client Implementation.
+ * This class is UDP Server Implementation.
  *
  */
 public class UDPServer {
@@ -25,8 +25,7 @@ public class UDPServer {
     List<String> clientRequestList;
 
     /**
-     * This method is the entry point requesting client to connect to server based
-     * on client type
+     * Main Method
      *
      */
     public static void main(String[] args) throws Exception {
@@ -88,7 +87,7 @@ public class UDPServer {
     }
 
     /**
-     * This method will extract payload from client
+     * Extract payload from client
      *
      */
     private void listenAndServe(int port) throws Exception
@@ -149,8 +148,7 @@ public class UDPServer {
     }
 
     /**
-     * This method id the entry point requesting client to connect to server based
-     * on client type
+     * Process payload request from client and create response
      *
      * @param request
      * @return response body

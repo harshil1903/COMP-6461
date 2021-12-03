@@ -18,7 +18,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * This class is the entry point of FTP Client Library Implementation.
+ * This class is the UDP Client Library Implementation.
  *
  */
 public class UDPClient {
@@ -29,8 +29,7 @@ public class UDPClient {
     static int ackCount = 0;
 
     /**
-     * This method is the entry point and when user run this class in console used
-     * need to provide valid request URL
+     * Main method
      *
      */
     public static void main(String[] args) throws Exception {
@@ -78,8 +77,7 @@ public class UDPClient {
     }
 
     /**
-     * This method will parse the user request URL and set different value in
-     * Request class based on different conditions
+     * Initiate connection by 3 way handshaking
      *
      * @param routerAddress Socket Address of the router
      * @param serverAddress Socket Address of the server
@@ -121,7 +119,7 @@ public class UDPClient {
     }
 
     /**
-     * This method will resend request to router based on timeout
+     * Resend request to router based on timeout
      *
      */
     private static void resend(DatagramChannel channel, Packet p, SocketAddress routerAddress) throws IOException {
@@ -150,7 +148,7 @@ public class UDPClient {
     }
 
     /**
-     * This method will send UDP request to router based on client input
+     * Send UDP request to router based on client input
      *
      */
     private static void runClient(SocketAddress routerAddr, InetSocketAddress serverAddr, String msg)
