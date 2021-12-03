@@ -64,7 +64,7 @@ public class UDPServer {
 
         //debug = true;
         if (debug)
-            System.out.println("Server is up and it assign to port Number: " + port);
+            System.out.println("Server is up and running at port Number: " + port);
 
         currentFolder = new File(dir);
 

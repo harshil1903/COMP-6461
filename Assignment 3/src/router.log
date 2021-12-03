@@ -517,3 +517,54 @@
 12:09:59.949318 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:50157, sz=5 is delivered
 12:09:59.949318 [queue=1] packet #4, 127.0.0.1:50157 -> 127.0.0.1:8080, sz=2 is delayed for 5.7ms
 12:09:59.965339 [queue=0] packet #4, 127.0.0.1:50157 -> 127.0.0.1:8080, sz=2 is delivered
+12:20:55.102261 config: drop-rate=0.00, max-delay=0s, seed=1638465655102261000
+12:20:55.103958 router is listening at :3000
+12:21:22.971906 [queue=0] packet #1, 127.0.0.1:49401 -> 127.0.0.1:8080, sz=14 is delivered
+12:21:22.981308 [queue=0] packet #1, 127.0.0.1:8080 -> 127.0.0.1:49401, sz=14 is delivered
+12:21:23.366631 [queue=0] packet #2, 127.0.0.1:49402 -> 127.0.0.1:8080, sz=42 is delivered
+12:21:23.383848 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:49402, sz=197 is delivered
+12:21:23.384424 [queue=0] packet #3, 127.0.0.1:49402 -> 127.0.0.1:8080, sz=8 is delivered
+12:21:23.384424 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:49402, sz=5 is delivered
+12:21:23.385379 [queue=0] packet #4, 127.0.0.1:49402 -> 127.0.0.1:8080, sz=2 is delivered
+12:21:52.376046 [queue=0] packet #1, 127.0.0.1:57214 -> 127.0.0.1:8080, sz=14 is delivered
+12:21:52.376554 [queue=0] packet #1, 127.0.0.1:8080 -> 127.0.0.1:57214, sz=14 is delivered
+12:21:52.378095 [queue=0] packet #2, 127.0.0.1:57215 -> 127.0.0.1:8080, sz=80 is delivered
+12:21:52.381070 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:57215, sz=199 is delivered
+12:21:52.381575 [queue=0] packet #3, 127.0.0.1:57215 -> 127.0.0.1:8080, sz=8 is delivered
+12:21:52.381575 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:57215, sz=5 is delivered
+12:21:52.382871 [queue=0] packet #4, 127.0.0.1:57215 -> 127.0.0.1:8080, sz=2 is delivered
+12:22:01.808105 [queue=0] packet #1, 127.0.0.1:57216 -> 127.0.0.1:8080, sz=14 is delivered
+12:22:01.808105 [queue=0] packet #1, 127.0.0.1:8080 -> 127.0.0.1:57216, sz=14 is delivered
+12:22:01.810062 [queue=0] packet #2, 127.0.0.1:57217 -> 127.0.0.1:8080, sz=32 is delivered
+12:22:01.812205 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:57217, sz=316 is delivered
+12:22:01.812857 [queue=0] packet #3, 127.0.0.1:57217 -> 127.0.0.1:8080, sz=8 is delivered
+12:22:01.812857 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:57217, sz=5 is delivered
+12:22:01.814048 [queue=0] packet #4, 127.0.0.1:57217 -> 127.0.0.1:8080, sz=2 is delivered
+12:22:17.481002 [queue=0] packet #1, 127.0.0.1:57218 -> 127.0.0.1:8080, sz=14 is delivered
+12:22:17.481002 [queue=0] packet #1, 127.0.0.1:8080 -> 127.0.0.1:57218, sz=14 is delivered
+12:22:17.482053 [queue=0] packet #2, 127.0.0.1:57219 -> 127.0.0.1:8080, sz=35 is delivered
+12:22:17.487495 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:57219, sz=524 is delivered
+12:22:17.488154 [queue=0] packet #3, 127.0.0.1:57219 -> 127.0.0.1:8080, sz=8 is delivered
+12:22:17.488154 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:57219, sz=5 is delivered
+12:22:17.489359 [queue=0] packet #4, 127.0.0.1:57219 -> 127.0.0.1:8080, sz=2 is delivered
+12:50:28.030804 config: drop-rate=0.20, max-delay=10ms, seed=1
+12:50:28.032932 router is listening at :3000
+12:51:02.635377 [queue=1] packet #1, 127.0.0.1:58818 -> 127.0.0.1:8080, sz=14 is delayed for 8.7ms
+12:51:02.651962 [queue=0] packet #1, 127.0.0.1:58818 -> 127.0.0.1:8080, sz=14 is delivered
+12:51:02.652516 [queue=1] packet #1, 127.0.0.1:8080 -> 127.0.0.1:58818, sz=14 is delayed for 5.9ms
+12:51:02.667431 [queue=0] packet #1, 127.0.0.1:8080 -> 127.0.0.1:58818, sz=14 is delivered
+12:51:03.011035 [queue=1] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is delayed for 1.8ms
+12:51:03.027338 [queue=0] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is delivered
+12:51:03.042862 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:58819, sz=197 is dropped
+12:51:06.029275 [queue=0] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is dropped
+12:51:09.030575 [queue=0] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is dropped
+12:51:12.033069 [queue=1] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is delayed for 9.4ms
+12:51:12.049467 [queue=0] packet #2, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=42 is delivered
+12:51:12.049974 [queue=1] packet #2, 127.0.0.1:8080 -> 127.0.0.1:58819, sz=197 is delayed for 6.2ms
+12:51:12.065440 [queue=0] packet #2, 127.0.0.1:8080 -> 127.0.0.1:58819, sz=197 is delivered
+12:51:12.065962 [queue=1] packet #3, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=8 is delayed for 2.8ms
+12:51:12.081279 [queue=0] packet #3, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=8 is delivered
+12:51:12.081787 [queue=1] packet #3, 127.0.0.1:8080 -> 127.0.0.1:58819, sz=5 is delayed for 1.1ms
+12:51:12.097261 [queue=0] packet #3, 127.0.0.1:8080 -> 127.0.0.1:58819, sz=5 is delivered
+12:51:12.097766 [queue=1] packet #4, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=2 is delayed for 3.7ms
+12:51:12.113311 [queue=0] packet #4, 127.0.0.1:58819 -> 127.0.0.1:8080, sz=2 is delivered

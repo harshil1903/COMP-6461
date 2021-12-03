@@ -1,11 +1,8 @@
 import static java.nio.channels.SelectionKey.OP_READ;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.URL;
@@ -158,7 +155,7 @@ public class UDPClient {
      */
     private static void runClient(SocketAddress routerAddr, InetSocketAddress serverAddr, String msg)
             throws IOException {
-        String dir = System.getProperty("user.dir");
+
         try (DatagramChannel channel = DatagramChannel.open()) {
             sequenceNum++;
             Packet p = new Packet.Builder().setType(0).setSequenceNumber(sequenceNum)
@@ -190,7 +187,7 @@ public class UDPClient {
             if (!receivedPackets.contains(resp.getSequenceNumber())) {
 
                 receivedPackets.add(resp.getSequenceNumber());
-                System.out.println("Response from Server : \n" + payload);
+                System.out.println("\nResponse from Server : \n" + payload);
 
                 // Sending ACK for the received of the response
                 sequenceNum++;
