@@ -5,6 +5,7 @@ httpfs -v -p 8080 -d E:\Concordia\6461 Communication Network and Protocols\COMP-
 
 For Client :
 
+httpc -v http://localhost:8080/get/
 httpc http://localhost:8080/get/
 httpc http://localhost:8080/post/test.txt -d '{"Assignment":3, "Course" : 6461}'
 httpc http://localhost:8080/post/test12.json -d '{"Assignment":3}'
@@ -12,11 +13,11 @@ httpc http://localhost:8080/post/test12345.json -d '{"test":123}'
 httpc http://localhost:8080/get/abc.txt
 httpc -h Content-Type:application/json http://localhost:8080/get/test.txt
 httpc http://localhost:8080/get/test99.txt
-httpc http://localhost:8080/post/123.txt -d ceedede
+httpc http://localhost:8080/post/123.txt -d xyxyxyxyxy
 
 For Router:
 
-./router --port=3000 --drop-rate=0.2 --max-delay=10ms --seed=1
+./router --port=3000 --drop-rate=0.3 --max-delay=10ms --seed=1
 
 ./router --port=3000 --drop-rate=0.2
 
