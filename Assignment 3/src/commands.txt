@@ -17,3 +17,7 @@ httpc http://localhost:8080/post/123.txt -d ceedede
 For Router:
 
 ./router --port=3000 --drop-rate=0.2 --max-delay=10ms --seed=1
+
+./router --port=3000 --drop-rate=0.3
+
+./router --port=3000 --max-delay=20ms

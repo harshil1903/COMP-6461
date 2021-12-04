@@ -199,7 +199,7 @@ public class UDPServer {
 
                 String t1 = requestData.get(i+1).split(":")[0];
                 String t2 = requestData.get(i+1).split(":")[1];
-                body = body + "\t\t\"" + t1 + "\": \"" + t2 + "\",\n";
+                body = body + "\n\t\t\"" + t1 + "\": \"" + t2 + "\",";
             }
         }
 
