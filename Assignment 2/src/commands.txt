@@ -14,7 +14,7 @@ httpfs GET / http://localhost:8080/get/
 
 httpfs GET /test.txt http://localhost:8080/get/
 
-httpfs POST /abc.txt http://localhost:8080/post/ -d {Assignment 2 : "Comp 6461"}
+httpfs POST /abc.txt http://localhost:8080/post/ -d {Assignment 2 : "Comp 445"}
 
 
 
@@ -23,10 +23,10 @@ HTTP Client
 
 httpc get -h Content-Type:application/json 'http://localhost:8080/get?Course=networking&Assignment=2'
 
-httpc post -h Content-Type:application/json -h Connection:Close -d '{"Assignment": 2, "Course": 6461}' 'http://localhost:8080/post?'
+httpc post -h Content-Type:application/json -h Connection:Close -d '{"Assignment": 2, "Course": 445}' 'http://localhost:8080/post?'
 
 httpc get -v -h Content-Type:application/json -h Connection:Close 'http://localhost:8080/get?course=networking&assignment=1'
 
-httpc post -v -h Content-Type:application/json -d '{"Assignment": 2, "Course": 6461}' 'http://localhost:8080/post?'
+httpc post -v -h Content-Type:application/json -d '{"Assignment": 2, "Course": 445}' 'http://localhost:8080/post?'
 
 

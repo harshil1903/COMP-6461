@@ -1,0 +1,27 @@
+/*
+
+Test Commands
+
+httpc get 'http://httpbin.org/get?course=networking&assignment=1'
+
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
+
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1' -o outget.txt
+
+httpc get -h Content-Type:application/json 'http://httpbin.org/get?course=networking&assignment=1'
+
+httpc post -h Content-Type:application/json -d '{"Assignment": 1, "Course":445}' http://httpbin.org/post
+
+httpc post -h Content-Type:application/json -f abc.txt http://httpbin.org/post
+
+httpc post -v -h Content-Type:application/json -f abc.txt http://httpbin.org/post -o out.txt
+
+
+
+curl -X GET "https://httpbin.org/get" -H "accept: application/json"
+httpc get -h accept:application/json 'http://httpbin.org/get'
+
+curl -X GET "http://httpbin.org/headers" -H  "accept: application/json"
+httpc get -h accept:application/json 'http://httpbin.org/headers'
+
+ */
